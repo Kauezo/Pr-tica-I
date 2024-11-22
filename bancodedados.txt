@@ -1,0 +1,40 @@
+CREATE DATABASE suporte_tecnico;
+
+USE suporte_tecnico;
+
+-- Tabela de Clientes
+CREATE TABLE clientes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    telefone VARCHAR(20) NOT NULL
+);
+
+-- Tabela de Colaboradores
+CREATE TABLE colaboradores (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL
+);
+
+-- Tabela de Chamados
+CREATE TABLE chamados (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    cliente_id INT NOT NULL,
+    descricao TEXT NOT NULL,
+    criticidade ENUM('baixa', 'média', 'alta') NOT NULL,
+    status ENUM('aberto', 'em andamento', 'resolvido') DEFAULT 'aberto',
+    colaborador_id INT,
+    data_abertura TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (cliente_id) REFERENCES clientes(id),
+    FOREIGN KEY (colaborador_id) REFERENCES colaboradores(id)
+);
+
+CREATE TABLE adm (
+	email VARCHAR(255) NOT NULL,
+    senha VARCHAR(255)NOT NULL
+    );
+    
+INSERT INTO adm  (email, senha) VALUES ('adm123@gmail.com', '123');
+
+SELECT * FROM  colaboradores
